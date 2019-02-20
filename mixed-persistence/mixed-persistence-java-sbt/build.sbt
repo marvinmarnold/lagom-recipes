@@ -17,7 +17,7 @@ lazy val `hello-api` = (project in file("hello-api"))
   )
 
 val lombok = "org.projectlombok" % "lombok" % "1.16.10"
-val h2 = "com.h2database" % "h2" % "1.4.196"
+val postgresjdbc = "org.postgresql" % "postgresql" % "42.2.5"
 val hibernate = "org.hibernate" % "hibernate-core" % "5.2.12.Final"
 
 lazy val `hello-impl` = (project in file("hello-impl"))
@@ -29,7 +29,7 @@ lazy val `hello-impl` = (project in file("hello-impl"))
       lagomJavadslPersistenceJpa,
       lagomJavadslTestKit,
       lombok,
-      h2,
+      postgresjdbc,
       hibernate
     )
   )

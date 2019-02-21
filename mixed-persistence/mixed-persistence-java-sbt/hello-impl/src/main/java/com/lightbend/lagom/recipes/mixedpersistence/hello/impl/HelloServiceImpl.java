@@ -16,6 +16,7 @@ import com.lightbend.lagom.recipes.mixedpersistence.hello.impl.readside.Greeting
 import org.pcollections.PSequence;
 
 import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
 
 /**
  * Implementation of the HelloService.
@@ -54,6 +55,8 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public ServiceCall<NotUsed, PSequence<UserGreeting>> allGreetings() {
-        return request -> greetings.all();
+      return request -> null;
+//      return request -> CompletedFuture.oTreePVector.empty();
+//        return request -> greetings.all();
     }
 }

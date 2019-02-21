@@ -1,3 +1,5 @@
+import scala.concurrent.duration._
+
 organization in ThisBuild := "com.lightbend.lagom.recipes"
 version in ThisBuild := "1.0-SNAPSHOT"
 
@@ -42,3 +44,4 @@ def common = Seq(
 )
 
 lagomKafkaEnabled in ThisBuild := false
+lagomCassandraMaxBootWaitingTime in ThisBuild := 60.seconds

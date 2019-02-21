@@ -13,17 +13,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <non-jta-data-source>DefaultDS</non-jta-data-source>
         <properties>
-            <property name="hibernate.dialect"
-                      value="org.hibernate.dialect.PostgreSQLDialect"/>
-
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5431/postgres" />
-            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-            <property name="hibernate.connection.username" value="postgres" />
-            <property name="hibernate.connection.password" value="somethingsknown" />
-            <property name="show_sql" value="true" />
-
-            <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->
-
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show_sql" value="true" />
         </properties>
     </persistence-unit>
 

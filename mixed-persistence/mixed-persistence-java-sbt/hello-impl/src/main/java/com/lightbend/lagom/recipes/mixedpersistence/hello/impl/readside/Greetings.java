@@ -21,11 +21,11 @@ import java.util.concurrent.CompletionStage;
 
 @Singleton
 public class Greetings {
-    private static final String SELECT_ALL_QUERY =
-            // JPA entities are mutable and cannot be safely shared across threads.
-            // The "SELECT NEW" syntax is used to return immutable result objects.
-            "SELECT NEW com.lightbend.lagom.recipes.mixedpersistence.hello.api.UserGreeting(g.id, g.message)" +
-                    " FROM UserGreetingRecord g";
+//    private static final String SELECT_ALL_QUERY =
+//            // JPA entities are mutable and cannot be safely shared across threads.
+//            // The "SELECT NEW" syntax is used to return immutable result objects.
+//            "SELECT NEW com.lightbend.lagom.recipes.mixedpersistence.hello.api.UserGreeting(g.id, g.message)" +
+//                    " FROM UserGreetingRecord g";
 
     // JpaSession provides an asynchronous, non-blocking API to
     // perform JPA actions in Slick's database execution context.
@@ -46,17 +46,17 @@ public class Greetings {
      *
      * @return a {@link CompletionStage} that completes with a list of all stored greetings
      */
-    public CompletionStage<PSequence<UserGreeting>> all() {
-        return jpaSession
-                .withTransaction(this::selectAllUserGreetings)
-                .thenApply(TreePVector::from);
-    }
+//    public CompletionStage<PSequence<UserGreeting>> all() {
+//        return jpaSession
+//                .withTransaction(this::selectAllUserGreetings)
+//                .thenApply(TreePVector::from);
+//    }
 
-    private List<UserGreeting> selectAllUserGreetings(EntityManager entityManager) {
-        return entityManager
-                .createQuery(SELECT_ALL_QUERY, UserGreeting.class)
-                .getResultList();
-    }
+//    private List<UserGreeting> selectAllUserGreetings(EntityManager entityManager) {
+//        return entityManager
+//                .createQuery(SELECT_ALL_QUERY, UserGreeting.class)
+//                .getResultList();
+//    }
 
     /**
      * Event processor that handles {@link GreetingMessageChanged} events
@@ -87,13 +87,20 @@ public class Greetings {
         }
 
         private void processGreetingMessageChanged(EntityManager entityManager, GreetingMessageChanged greetingMessageChanged) {
-            UserGreetingRecord record = entityManager.find(UserGreetingRecord.class, greetingMessageChanged.getName());
-            if (record == null) {
-                record = new UserGreetingRecord();
-                record.setId(greetingMessageChanged.getName());
-                entityManager.persist(record);
-            }
-            record.setMessage(greetingMessageChanged.getMessage());
+          System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^processGreetingMessageChanged");
+          System.out.println(greetingMessageChanged);
+//            UserGreetingRecord record = entityManager.find(UserGreetingRecord.class, greetingMessageChanged.getName());
+//            if (record == null) {
+//                record = new UserGreetingRecord();
+//                record.setId(greetingMessageChanged.getName());
+//                entityManager.persist(record);
+//            }
+//            record.setMessage(greetingMessageChanged.getMessage());
+
+          UserGreetingRecord record = new UserGreetingRecord();
+          record.setId(greetingMessageChanged.getName());
+          record.setMessage(greetingMessageChanged.getMessage());
+          entityManager.persist(record);
         }
 
         @Override

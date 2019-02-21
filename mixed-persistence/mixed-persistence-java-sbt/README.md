@@ -1,4 +1,17 @@
-# Mixed Persistence Service
+# Mixed Persistence Service with PostgreSQL
+
+## Getting started
+1. Add `lagom.persistence.jdbc.create-tables.auto = false` to application.conf
+2. Create a PostgreSQL db (note this example runs on the host at post 5431): `docker run -p 5431:5432 --name psql1 -e POSTGRES_PASSWORD=somethingsknown -d postgres
+`
+3. Manually create the offset table:
+```
+CREATE TABLE read_side_offsets (
+  read_side_id VARCHAR(255), tag VARCHAR(255),
+  sequence_offset bytea, time_uuid_offset char(36),
+  PRIMARY KEY (read_side_id, tag)
+)
+```
 
 This recipe demonstrates how to create a service in Lagom for Java that uses Cassandra for write-side persistence and JPA for a read-side view.
 

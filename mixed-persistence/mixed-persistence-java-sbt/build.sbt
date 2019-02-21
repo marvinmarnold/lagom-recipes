@@ -28,7 +28,7 @@ lazy val `hello-impl` = (project in file("hello-impl"))
   .settings(
     libraryDependencies ++= Seq(
       lagomJavadslPersistenceCassandra,
-      lagomJavadslPersistenceJdbc,
+      lagomJavadslPersistenceJpa,
       lagomJavadslTestKit,
       lombok,
       postgresjdbc,
